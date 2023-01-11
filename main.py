@@ -13,7 +13,7 @@ from kcapi.ie import AuthenticationFlowsImporter
 from kcloader.resource import ResourcePublisher, ManyResources, SingleResource, \
     SingleClientResource, SingleCustomAuthenticationResource, ClientScopeResource, \
     IdentityProviderResource, IdentityProviderMapperResource, UserFederationResource, \
-    RealmResource
+    RealmResource, UserFederationManager
 from kcloader.resource import IdentityProviderManager, ClientManager, RealmRoleManager
 from kcloader.tools import read_from_json
 
@@ -164,8 +164,18 @@ def main(args):
     # realm_res.publish()
 
     # load identity providers
+    #  IdentityProviderManager and UserFederationManager should extend BaseManager (example is BaseManager->BaseRoleManager)
+    #  example woudld be: 
+    #  - BaseRoleManager(BaseManager)
+    #  - IdentityProviderManager(BaseManager)
+    #  - UserFederationManager(BaseManager)
+
     idp_manager = IdentityProviderManager(keycloak_api, realm_name, datadir)
     creation_state = idp_manager.publish()
+
+    uf_manager = UserFederationManager(keycloak_api, realm_name, datadir)
+    creation_state = uf_manager.publish()
+
 
     realm_role_manager = RealmRoleManager(keycloak_api, realm_name, datadir)
     creation_state = realm_role_manager.publish(include_composite=False)

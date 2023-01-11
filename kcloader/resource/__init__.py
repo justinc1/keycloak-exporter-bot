@@ -9,7 +9,7 @@ from .realm_role_resource import RealmRoleManager, RealmRoleResource
 from .client_scope_resource import ClientScopeResource
 from .identity_provider_resource import IdentityProviderResource, IdentityProviderMapperResource
 from .identity_provider_resource import IdentityProviderManager, IdentityProviderMapperManager
-from .user_federation_resource import UserFederationResource
+from .user_federation_resource import UserFederationResource, UserFederationManager
 from .realm_resource import RealmResource
 
 from .many_resources import ManyResources, MultipleResourceInFolders
@@ -27,6 +27,7 @@ __all__ = [
     IdentityProviderResource,
     IdentityProviderMapperResource,
     UserFederationResource,
+    UserFederationManager,
 
     ManyResources,
     MultipleResourceInFolders,
